@@ -1,6 +1,6 @@
 package it.unibo.pps.e1;
 
-class CoreBankAccount implements BankAccount {
+abstract class CoreBankAccount implements BankAccount {
 
     private int balance = 0;
 
@@ -16,4 +16,7 @@ class CoreBankAccount implements BankAccount {
     public void withdraw(int amount) {
         this.balance = this.balance - amount;
     }
+
+    @Override
+    public abstract int getWithdrawalFee(int amountToWithdraw);
 }

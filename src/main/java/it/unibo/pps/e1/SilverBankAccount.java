@@ -1,27 +1,18 @@
 package it.unibo.pps.e1;
 
-public class SilverBankAccount implements BankAccount {
-    BankAccount base;
-
-    public SilverBankAccount(BankAccount bankAccount) {
-        base = bankAccount;
-    }
-
-    @Override
-    public int getBalance() {
-        return base.getBalance();
-    }
-
-    @Override
-    public void deposit(int amount) {
-        base.deposit(amount);
-    }
+public class SilverBankAccount extends CoreBankAccount {
+    //BankAccount base;
 
     @Override
     public void withdraw(int amount) {
         if (this.getBalance() < amount){
             throw new IllegalStateException();
         }
-        base.withdraw(amount + 1);
+        super.withdraw(amount + 1);
+    }
+
+    @Override
+    public int getWithdrawalFee(int amountToWithdraw) {
+        return 0;
     }
 }
