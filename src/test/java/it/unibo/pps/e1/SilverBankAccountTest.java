@@ -8,6 +8,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class SilverBankAccountTest extends CoreBankAccountTest {
 
+    @BeforeEach
+    public void init(){
+      this.account = new SilverBankAccount();
+    }
     @Test
     public void testCanWithdraw() {
         final int withdrawAmount = 200;
