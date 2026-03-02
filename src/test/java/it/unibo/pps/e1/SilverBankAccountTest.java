@@ -10,7 +10,7 @@ public class SilverBankAccountTest extends CoreBankAccountTest {
 
     @BeforeEach
     public void init(){
-      this.account = new SilverBankAccount();
+      this.account = new SilverBankAccount(new CoreBankAccount());
     }
     @Test
     public void testCanWithdraw() {
