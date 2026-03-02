@@ -14,7 +14,7 @@ abstract class CoreBankAccount implements BankAccount {
     }
     @Override
     public void withdraw(int amount) {
-        this.balance = this.balance - amount;
+        this.balance = this.balance - amount - getWithdrawalFee(amount);
     }
 
     @Override
