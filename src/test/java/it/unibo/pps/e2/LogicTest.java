@@ -2,6 +2,7 @@ package it.unibo.pps.e2;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LogicTest {
     private Logics logics;
@@ -46,6 +47,11 @@ public class LogicTest {
             }
         }
         assertEquals(1, pawns);
+    }
+
+    @Test
+    public void shouldNotBeAbleToAccessOutOfBoundsSquares(){
+        assertThrows(IndexOutOfBoundsException.class, () -> logics.hit(BOARD_SIZE + 1, BOARD_SIZE + 1));
     }
 
 }
