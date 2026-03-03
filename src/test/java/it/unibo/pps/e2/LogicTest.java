@@ -59,4 +59,9 @@ public class LogicTest {
         assertThrows(IndexOutOfBoundsException.class, () -> logics = new LogicsImpl.Builder(BOARD_SIZE).randomPawn().knight(new Pair<>(BOARD_SIZE, BOARD_SIZE)).build());
     }
 
+    @Test
+    public void shouldNotBeAbleToPositionPawnOutOfBounds(){
+        assertThrows(IndexOutOfBoundsException.class, () -> logics = new LogicsImpl.Builder(BOARD_SIZE).randomKnight().pawn(new Pair<>(BOARD_SIZE, BOARD_SIZE)).build());
+    }
+
 }

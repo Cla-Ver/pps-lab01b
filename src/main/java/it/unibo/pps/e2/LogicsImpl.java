@@ -30,10 +30,13 @@ public class LogicsImpl implements Logics {
 		public Builder (int size){
 			this.size = size;
 		}
-		public Builder knight(Pair<Integer, Integer> knightPosition){
-			if(knightPosition.getX() < 0 || knightPosition.getX() >= size || knightPosition.getY() < 0 || knightPosition.getY() >= size){
+		private void checkInBoundsCreation(Pair<Integer, Integer> position){
+			if(position.getX() < 0 || position.getX() >= size || position.getY() < 0 || position.getY() >= size){
 				throw new IndexOutOfBoundsException("Knight out of bounds");
 			}
+		}
+		public Builder knight(Pair<Integer, Integer> knightPosition){
+			checkInBoundsCreation(knightPosition);
 			this.knight = knightPosition;
 			return this;
 		}
@@ -42,6 +45,7 @@ public class LogicsImpl implements Logics {
 			return this;
 		}
 		public Builder pawn(Pair<Integer, Integer> pawnPosition){
+			checkInBoundsCreation(pawnPosition);
 			this.pawn = pawnPosition;
 			return this;
 		}
