@@ -9,11 +9,54 @@ public class LogicsImpl implements Logics {
 	private final Random random = new Random();
 	private final int size;
 	 
-    public LogicsImpl(int size){
+    /*public LogicsImpl(int size){
     	this.size = size;
         this.pawn = this.randomEmptyPosition();
-        this.knight = this.randomEmptyPosition();	
-    }
+        this.knight = this.randomEmptyPosition();
+    }*/
+
+	private LogicsImpl(int size, Pair<Integer, Integer> knightPosition, Pair<Integer, Integer> pawnPosition){
+		this.size = size;
+		this.knight = knightPosition;
+		this.pawn = pawnPosition;
+	}
+
+	public static class Builder{
+		private Pair<Integer,Integer> pawn;
+		private Pair<Integer,Integer> knight;
+		private final Random random = new Random();
+		private final int size;
+
+		public Builder (int size){
+			this.size = size;
+		}
+		public Builder knight(Pair<Integer, Integer> knightPosition){
+			this.knight = knightPosition;
+			return this;
+		}
+		public Builder randomKnight(){
+			this.knight = randomEmptyPosition();
+			return this;
+		}
+		public Builder pawn(Pair<Integer, Integer> pawnPosition){
+			this.pawn = pawnPosition;
+			return this;
+		}
+		public Builder randomPawn(){
+			this.pawn = randomEmptyPosition();
+			return this;
+		}
+		public LogicsImpl build(){
+			return new LogicsImpl(size, knight, pawn);
+		}
+		private final Pair<Integer,Integer> randomEmptyPosition(){
+			Pair<Integer,Integer> pos = new Pair<>(this.random.nextInt(size),this.random.nextInt(size));
+			// the recursive call below prevents clash with an existing pawn
+			return this.pawn!=null && this.pawn.equals(pos) ? randomEmptyPosition() : pos;
+		}
+
+
+	}
     
 	private final Pair<Integer,Integer> randomEmptyPosition(){
     	Pair<Integer,Integer> pos = new Pair<>(this.random.nextInt(size),this.random.nextInt(size));
