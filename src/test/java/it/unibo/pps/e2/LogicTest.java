@@ -72,4 +72,16 @@ public class LogicTest {
         assertTrue(logics.hasKnight(startingXPos, startingYPos));
     }
 
+    @Test
+    public void knightShouldChangePositionOnValidMove(){
+        final int startingXPos = 0;
+        final int startingYPos = 0;
+        final int verticalMovement = 1;
+        final int horizontalMovement = 2;
+        logics = new LogicsImpl.Builder(BOARD_SIZE).randomPawn().knight(new Pair<>(startingXPos, startingYPos)).build();
+        logics.hit(startingXPos + horizontalMovement, startingYPos + verticalMovement);
+        assertTrue(logics.hasKnight(startingXPos + horizontalMovement, startingYPos + verticalMovement));
+    }
+
+
 }
