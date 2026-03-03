@@ -10,7 +10,7 @@ public class LogicTest {
 
     @BeforeEach
     public void init() {
-        logics = new LogicsImpl(BOARD_SIZE);
+        logics = new LogicsImpl.Builder(BOARD_SIZE).randomKnight().randomPawn().build();
     }
 
     @Test
@@ -52,6 +52,11 @@ public class LogicTest {
     @Test
     public void shouldNotBeAbleToAccessOutOfBoundsSquares(){
         assertThrows(IndexOutOfBoundsException.class, () -> logics.hit(BOARD_SIZE + 1, BOARD_SIZE + 1));
+    }
+
+    @Test
+    public void shouldNotBeAbleToPositionKnightOutOfBounds(){
+        assertThrows(IndexOutOfBoundsException.class, () -> logics = new LogicsImpl.Builder(BOARD_SIZE).randomPawn().knight(new Pair<>(BOARD_SIZE, BOARD_SIZE)).build());
     }
 
 }
