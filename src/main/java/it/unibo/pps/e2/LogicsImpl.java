@@ -62,7 +62,6 @@ public class LogicsImpl implements Logics {
 			return this.pawn!=null && this.pawn.equals(pos) ? randomEmptyPosition() : pos;
 		}
 
-
 	}
     
 	/*private final Pair<Integer,Integer> randomEmptyPosition(){
