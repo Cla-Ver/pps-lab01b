@@ -1,8 +1,7 @@
 package it.unibo.pps.e2;
 import org.junit.jupiter.api.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class LogicTest {
     private Logics logics;
@@ -51,7 +50,7 @@ public class LogicTest {
 
     @Test
     public void shouldNotBeAbleToAccessOutOfBoundsSquares(){
-        assertThrows(IndexOutOfBoundsException.class, () -> logics.hit(BOARD_SIZE + 1, BOARD_SIZE + 1));
+        assertThrows(IndexOutOfBoundsException.class, () -> logics.hit(BOARD_SIZE, BOARD_SIZE));
     }
 
     @Test
@@ -62,6 +61,15 @@ public class LogicTest {
     @Test
     public void shouldNotBeAbleToPositionPawnOutOfBounds(){
         assertThrows(IndexOutOfBoundsException.class, () -> logics = new LogicsImpl.Builder(BOARD_SIZE).randomKnight().pawn(new Pair<>(BOARD_SIZE, BOARD_SIZE)).build());
+    }
+
+    @Test
+    public void knightShouldNotChangePositionOnIllegalMove(){
+        final int startingXPos = 0;
+        final int startingYPos = 0;
+        logics = new LogicsImpl.Builder(BOARD_SIZE).randomPawn().knight(new Pair<>(startingXPos, startingYPos)).build();
+        logics.hit(BOARD_SIZE - 1, BOARD_SIZE - 1);
+        assertTrue(logics.hasKnight(startingXPos, startingYPos));
     }
 
 }
