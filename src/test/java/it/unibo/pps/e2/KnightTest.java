@@ -27,4 +27,10 @@ public class KnightTest {
         assertTrue(knight.getPosition().getY() < 0);
     }
 
+    @Test
+    public void knightShouldAllowNegativeXPosition(){
+        knight.move(KnightMove.LEFT_UP);
+        assertTrue(knight.getPosition().getX() < 0);
+    }
+
 }
