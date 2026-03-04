@@ -27,7 +27,12 @@ public class LogicsImpl implements Logics {
 		private final Random random = new Random();
 		private final int size;
 
-		public Builder (int size){
+
+		public Builder (int size) {
+			final int sizeLowerBound = 3;
+			if(size < sizeLowerBound){
+				throw new IllegalArgumentException("Board size too small");
+			}
 			this.size = size;
 		}
 		private void checkInBoundsCreation(Pair<Integer, Integer> position){

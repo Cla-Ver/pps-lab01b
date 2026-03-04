@@ -15,6 +15,12 @@ public class LogicTest {
     }
 
     @Test
+    public void chessboardSizeShouldNotBeTooSmall(){
+        final int boardSize = 0;
+        assertThrows(IllegalArgumentException.class, () -> logics = new LogicsImpl.Builder(boardSize).randomPawn().randomKnight().build());
+    }
+
+    @Test
     public void chessboardShouldHaveOnlyOneKnight() {
         int knights = 0;
         for (int column = 0; column < BOARD_SIZE; column++) {
