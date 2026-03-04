@@ -53,7 +53,10 @@ public class LogicsImpl implements Logics {
 			this.pawn = randomEmptyPosition();
 			return this;
 		}
-		public LogicsImpl build(){
+		public LogicsImpl build() {
+			if(knight == null || pawn == null){
+				throw new IllegalStateException("No position chosen for knight or pawn");
+			}
 			return new LogicsImpl(size, knight, pawn);
 		}
 		private final Pair<Integer,Integer> randomEmptyPosition(){

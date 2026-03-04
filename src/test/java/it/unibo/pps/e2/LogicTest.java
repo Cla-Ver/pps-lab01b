@@ -56,6 +56,16 @@ public class LogicTest {
     }
 
     @Test
+    public void shouldNotBeAbleToStartGameWithNoKnight(){
+        assertThrows(IllegalStateException.class, () -> logics = new LogicsImpl.Builder(BOARD_SIZE).randomPawn().build());
+    }
+
+    @Test
+    public void shouldNotBeAbleToStartGameWithNoPawn(){
+        assertThrows(IllegalStateException.class, () -> logics = new LogicsImpl.Builder(BOARD_SIZE).randomKnight().build());
+    }
+
+    @Test
     public void knightShouldNotChangePositionOnIllegalMove(){
         logics = new LogicsImpl.Builder(BOARD_SIZE).randomPawn().knight(new Pair<>(KNIGHT_START_X_POS, KNIGHT_START_Y_POS)).build();
         logics.hit(BOARD_SIZE - 1, BOARD_SIZE - 1);
