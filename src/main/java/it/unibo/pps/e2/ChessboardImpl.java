@@ -52,6 +52,16 @@ public class ChessboardImpl implements Chessboard {
     }
 
     @Override
+    public boolean isKnightPlaced() {
+        return knight != null;
+    }
+
+    @Override
+    public boolean isPawnPlaced() {
+        return pawn != null;
+    }
+
+    @Override
     public void moveKnight(KnightMove move) {
         if(knight == null){
             throw new IllegalStateException("Knight's position is not set");
@@ -65,11 +75,17 @@ public class ChessboardImpl implements Chessboard {
 
     @Override
     public Pair<Integer, Integer> getKnightPosition() {
+        if(!isKnightPlaced()){
+            throw new IllegalStateException("Knight's position is not set");
+        }
         return knight.getPosition();
     }
 
     @Override
     public Pair<Integer, Integer> getPawnPosition() {
+        if(!isPawnPlaced()){
+            throw new IllegalStateException("Pawn's position is not set");
+        }
         return pawn.position();
     }
 

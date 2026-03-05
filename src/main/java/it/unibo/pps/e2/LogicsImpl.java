@@ -4,19 +4,14 @@ import java.util.*;
 
 public class LogicsImpl implements Logics {
 	
-	private final Pawn pawn;
-	private final Knight knight;
-	private final int size;
+	private final Chessboard chessboard;
 
-	private LogicsImpl(int size, Pair<Integer, Integer> knightPosition, Pair<Integer, Integer> pawnPosition){
-		this.size = size;
-		this.knight = new KnightImpl(knightPosition);
-		this.pawn = new Pawn(pawnPosition);
+	private LogicsImpl(Chessboard chessboard){
+		this.chessboard = chessboard;
 	}
 
 	public static class Builder{
-		private Pair<Integer,Integer> pawn;
-		private Pair<Integer,Integer> knight;
+		private final Chessboard chessboard;
 		private final Random random = new Random();
 		private final int size;
 
@@ -27,72 +22,67 @@ public class LogicsImpl implements Logics {
 				throw new IllegalArgumentException("Board size too small");
 			}
 			this.size = size;
+			chessboard = new ChessboardImpl(size);
 		}
 		private void checkInBoundsCreation(Pair<Integer, Integer> position){
 			if(position.getX() < 0 || position.getX() >= size || position.getY() < 0 || position.getY() >= size){
 				throw new IndexOutOfBoundsException("Knight out of bounds");
 			}
 		}
-		public Builder knight(Pair<Integer, Integer> knightPosition){
-			checkInBoundsCreation(knightPosition);
-			this.knight = knightPosition;
+		public Builder knight(Knight knight){
+			checkInBoundsCreation(knight.getPosition());
+			chessboard.placeKnight(knight);
 			return this;
 		}
 		public Builder randomKnight(){
-			this.knight = randomEmptyPosition();
+			chessboard.placeKnight(new KnightImpl(randomEmptyPosition()));
 			return this;
 		}
-		public Builder pawn(Pair<Integer, Integer> pawnPosition){
-			checkInBoundsCreation(pawnPosition);
-			this.pawn = pawnPosition;
+		public Builder pawn(Pawn pawn){
+			checkInBoundsCreation(pawn.position());
+			chessboard.placePawn(pawn);
 			return this;
 		}
 		public Builder randomPawn(){
-			this.pawn = randomEmptyPosition();
+			chessboard.placePawn(new Pawn(randomEmptyPosition()));
 			return this;
 		}
 		public LogicsImpl build() {
-			if(knight == null || pawn == null){
+			if(!chessboard.isKnightPlaced() || !chessboard.isPawnPlaced()){
 				throw new IllegalStateException("No position chosen for knight or pawn");
 			}
-			return new LogicsImpl(size, knight, pawn);
+			return new LogicsImpl(chessboard);
 		}
 		private final Pair<Integer,Integer> randomEmptyPosition(){
 			Pair<Integer,Integer> pos = new Pair<>(this.random.nextInt(size),this.random.nextInt(size));
 			// the recursive call below prevents clash with an existing pawn
-			return this.pawn!=null && this.pawn.equals(pos) ? randomEmptyPosition() : pos;
+			return this.chessboard.isPawnPlaced() && this.chessboard.getPawnPosition().equals(pos) ? randomEmptyPosition() : pos;
 		}
 
 	}
-    
-	/*private final Pair<Integer,Integer> randomEmptyPosition(){
-    	Pair<Integer,Integer> pos = new Pair<>(this.random.nextInt(size),this.random.nextInt(size));
-    	// the recursive call below prevents clash with an existing pawn
-    	return this.pawn!=null && this.pawn.equals(pos) ? randomEmptyPosition() : pos;
-    }*/
-    
+
 	@Override
 	public boolean hit(int row, int col) {
-		if (row<0 || col<0 || row >= this.size || col >= this.size) {
+		if (row<0 || col<0 || row >= this.chessboard.getChessboardSize() || col >= this.chessboard.getChessboardSize()) {
 			throw new IndexOutOfBoundsException();
 		}
 		// Below a compact way to express allowed moves for the knight
-		int x = row-this.knight.getPosition().getX();
-		int y = col-this.knight.getPosition().getY();
+		int x = row-this.chessboard.getKnightPosition().getX();
+		int y = col-this.chessboard.getKnightPosition().getY();
 		if (x!=0 && y!=0 && Math.abs(x)+Math.abs(y)==3) {
-			this.knight.move(KnightMove.from(x, y));
-			return this.pawn.position().equals(this.knight.getPosition());
+			this.chessboard.moveKnight(KnightMove.from(x, y));
+			return this.chessboard.getPawnPosition().equals(this.chessboard.getKnightPosition());
 		}
 		return false;
 	}
 
 	@Override
 	public boolean hasKnight(int row, int col) {
-		return this.knight.getPosition().equals(new Pair<>(row,col));
+		return this.chessboard.isKnightPlaced() && this.chessboard.getKnightPosition().equals(new Pair<>(row,col));
 	}
 
 	@Override
 	public boolean hasPawn(int row, int col) {
-		return this.pawn.position().equals(new Pair<>(row,col));
+		return this.chessboard.isPawnPlaced() && this.chessboard.getPawnPosition().equals(new Pair<>(row,col));
 	}
 }

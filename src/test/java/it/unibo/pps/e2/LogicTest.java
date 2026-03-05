@@ -53,12 +53,12 @@ public class LogicTest {
 
     @Test
     public void shouldNotBeAbleToPositionKnightOutOfBounds(){
-        assertThrows(IndexOutOfBoundsException.class, () -> logics = new LogicsImpl.Builder(BOARD_SIZE).randomPawn().knight(new Pair<>(BOARD_SIZE, BOARD_SIZE)).build());
+        assertThrows(IndexOutOfBoundsException.class, () -> logics = new LogicsImpl.Builder(BOARD_SIZE).randomPawn().knight(new KnightImpl(new Pair<>(BOARD_SIZE, BOARD_SIZE))).build());
     }
 
     @Test
     public void shouldNotBeAbleToPositionPawnOutOfBounds(){
-        assertThrows(IndexOutOfBoundsException.class, () -> logics = new LogicsImpl.Builder(BOARD_SIZE).randomKnight().pawn(new Pair<>(BOARD_SIZE, BOARD_SIZE)).build());
+        assertThrows(IndexOutOfBoundsException.class, () -> logics = new LogicsImpl.Builder(BOARD_SIZE).randomKnight().pawn(new Pawn(new Pair<>(BOARD_SIZE, BOARD_SIZE))).build());
     }
 
     @Test
@@ -73,7 +73,7 @@ public class LogicTest {
 
     @Test
     public void knightShouldNotChangePositionOnIllegalMove(){
-        logics = new LogicsImpl.Builder(BOARD_SIZE).randomPawn().knight(new Pair<>(KNIGHT_START_X_POS, KNIGHT_START_Y_POS)).build();
+        logics = new LogicsImpl.Builder(BOARD_SIZE).randomPawn().knight(new KnightImpl(new Pair<>(KNIGHT_START_X_POS, KNIGHT_START_Y_POS))).build();
         logics.hit(BOARD_SIZE - 1, BOARD_SIZE - 1);
         assertTrue(logics.hasKnight(KNIGHT_START_X_POS, KNIGHT_START_Y_POS));
     }
@@ -82,7 +82,7 @@ public class LogicTest {
     public void knightShouldChangePositionOnValidMove(){
         final int verticalMovement = 1;
         final int horizontalMovement = 2;
-        logics = new LogicsImpl.Builder(BOARD_SIZE).randomPawn().knight(new Pair<>(KNIGHT_START_X_POS, KNIGHT_START_Y_POS)).build();
+        logics = new LogicsImpl.Builder(BOARD_SIZE).randomPawn().knight(new KnightImpl(new Pair<>(KNIGHT_START_X_POS, KNIGHT_START_Y_POS))).build();
         logics.hit(KNIGHT_START_X_POS + horizontalMovement, KNIGHT_START_Y_POS + verticalMovement);
         assertTrue(logics.hasKnight(KNIGHT_START_X_POS + horizontalMovement, KNIGHT_START_Y_POS + verticalMovement));
     }
@@ -91,7 +91,7 @@ public class LogicTest {
     public void knightShouldSuccessfullyHitPawnWhenMovingOnSameSquare(){
         final int pawnX = 1;
         final int pawnY = 2;
-        logics = new LogicsImpl.Builder(BOARD_SIZE).knight(new Pair<>(KNIGHT_START_X_POS, KNIGHT_START_Y_POS)).pawn(new Pair<>(KNIGHT_START_X_POS + pawnX, KNIGHT_START_Y_POS + pawnY)).build();
+        logics = new LogicsImpl.Builder(BOARD_SIZE).knight(new KnightImpl(new Pair<>(KNIGHT_START_X_POS, KNIGHT_START_Y_POS))).pawn(new Pawn(new Pair<>(KNIGHT_START_X_POS + pawnX, KNIGHT_START_Y_POS + pawnY))).build();
         assertTrue(logics.hit(KNIGHT_START_X_POS + pawnX, KNIGHT_START_X_POS + pawnY));
     }
 
