@@ -22,7 +22,11 @@ public class ChessboardImpl implements Chessboard {
         }
     }
 
-
+    private void validateKnightMove(KnightMove move){
+        if(!isSquareValid(new Pair<>(this.knight.getPosition().getX() + move.getDx(), this.knight.getPosition().getY() + move.getDy()))){
+            throw new IllegalArgumentException("Invalid destination square");
+        }
+    }
 
     @Override
     public boolean hasKnight() {
@@ -50,6 +54,18 @@ public class ChessboardImpl implements Chessboard {
         }
         validateInitialPosition(pawn.position());
         this.pawn = pawn;
+    }
+
+    @Override
+    public void moveKnight(KnightMove move) {
+        if(knight == null){
+            throw new IllegalStateException("Knight's position is not set");
+        }
+        if(pawn == null){
+            throw new IllegalStateException("Pawn's position is not set");
+        }
+        validateKnightMove(move);
+        knight.move(move);
     }
 
     @Override

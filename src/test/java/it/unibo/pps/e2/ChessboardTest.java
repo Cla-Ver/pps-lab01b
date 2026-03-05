@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ChessboardTest {
     private Chessboard chessboard;
+    private static final Pair<Integer, Integer>  INITIAL_KNIGHT_POSITION = new Pair<>(0, 0);
+    private static final Pair<Integer, Integer>  INITIAL_PAWN_POSITION = new Pair<>(1, 2);
     private static final int BOARD_SIZE = 5;
 
     @BeforeEach
@@ -31,14 +33,26 @@ public class ChessboardTest {
 
     @Test
     public void chessboardShouldNotAllowSettingInitialKnightPositionMoreThanOnce(){
-        chessboard.placeKnight(new KnightImpl(new Pair<>(0, 0)));
-        assertThrows(IllegalStateException.class, () -> chessboard.placeKnight(new KnightImpl(new Pair<>(0, 0))));
+        chessboard.placeKnight(new KnightImpl(INITIAL_KNIGHT_POSITION));
+        assertThrows(IllegalStateException.class, () -> chessboard.placeKnight(new KnightImpl(INITIAL_KNIGHT_POSITION)));
     }
 
     @Test
     public void chessboardShouldNotAllowSettingInitialPawnPositionMoreThanOnce(){
-        chessboard.placePawn(new Pawn(new Pair<>(0, 0)));
-        assertThrows(IllegalStateException.class, () -> chessboard.placePawn(new Pawn(new Pair<>(0, 0))));
+        chessboard.placePawn(new Pawn(INITIAL_PAWN_POSITION));
+        assertThrows(IllegalStateException.class, () -> chessboard.placePawn(new Pawn(INITIAL_PAWN_POSITION)));
     }
+
+    @Test
+    public void chessboardShouldNotAllowMovingKnightIfItsPositionIsNotSet(){
+        assertThrows(IllegalStateException.class, () -> chessboard.moveKnight(KnightMove.DOWN_RIGHT));
+    }
+
+    @Test
+    public void chessboardShouldNotAllowMovingKnightIfPawnPositionIsNotSet(){
+        chessboard.placeKnight(new KnightImpl(INITIAL_KNIGHT_POSITION));
+        assertThrows(IllegalStateException.class, () -> chessboard.moveKnight(KnightMove.DOWN_RIGHT));
+    }
+
 
 }
