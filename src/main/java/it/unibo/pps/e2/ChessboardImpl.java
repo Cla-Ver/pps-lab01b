@@ -29,6 +29,11 @@ public class ChessboardImpl implements Chessboard {
     }
 
     @Override
+    public int getChessboardSize() {
+        return this.size;
+    }
+
+    @Override
     public void placeKnight(Knight knight) {
         if(this.knight != null){
             throw new IllegalStateException("Knight's position already set");
