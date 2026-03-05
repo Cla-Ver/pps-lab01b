@@ -4,7 +4,7 @@ import java.util.*;
 
 public class LogicsImpl implements Logics {
 	
-	private final Pair<Integer,Integer> pawn;
+	private final Pawn pawn;
 	private final Knight knight;
 	//private final Random random = new Random();
 	private final int size;
@@ -18,7 +18,7 @@ public class LogicsImpl implements Logics {
 	private LogicsImpl(int size, Pair<Integer, Integer> knightPosition, Pair<Integer, Integer> pawnPosition){
 		this.size = size;
 		this.knight = new KnightImpl(knightPosition);
-		this.pawn = pawnPosition;
+		this.pawn = new Pawn(pawnPosition);
 	}
 
 	public static class Builder{
@@ -88,7 +88,7 @@ public class LogicsImpl implements Logics {
 		int y = col-this.knight.getPosition().getY();
 		if (x!=0 && y!=0 && Math.abs(x)+Math.abs(y)==3) {
 			this.knight.move(KnightMove.from(x, y));
-			return this.pawn.equals(this.knight.getPosition());
+			return this.pawn.position().equals(this.knight.getPosition());
 		}
 		return false;
 	}
@@ -100,6 +100,6 @@ public class LogicsImpl implements Logics {
 
 	@Override
 	public boolean hasPawn(int row, int col) {
-		return this.pawn.equals(new Pair<>(row,col));
+		return this.pawn.position().equals(new Pair<>(row,col));
 	}
 }
