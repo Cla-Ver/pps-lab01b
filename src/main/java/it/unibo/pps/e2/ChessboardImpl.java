@@ -12,6 +12,16 @@ public class ChessboardImpl implements Chessboard {
         size = boardSize;
     }
 
+    private boolean isSquareValid(Pair<Integer, Integer> position){
+        return position.getX() >= 0 && position.getX() < size && position.getY() >= 0 && position.getY() < size;
+    }
+
+    private void validateInitialPosition(Pair<Integer, Integer> position) {
+        if(!isSquareValid(position)){
+            throw new IllegalArgumentException("Invalid starting position");
+        }
+    }
+
     @Override
     public boolean hasKnight() {
         return false;
@@ -20,6 +30,18 @@ public class ChessboardImpl implements Chessboard {
     @Override
     public boolean hasPawn() {
         return false;
+    }
+
+    @Override
+    public void placeKnight(Knight knight) {
+        validateInitialPosition(knight.getPosition());
+        this.knight = knight;
+    }
+
+    @Override
+    public void placePawn(Pawn pawn) {
+        validateInitialPosition(pawn.position());
+        this.pawn = pawn;
     }
 
     @Override
@@ -32,8 +54,4 @@ public class ChessboardImpl implements Chessboard {
         return null;
     }
 
-    @Override
-    public boolean isSquareValid() {
-        return false;
-    }
 }

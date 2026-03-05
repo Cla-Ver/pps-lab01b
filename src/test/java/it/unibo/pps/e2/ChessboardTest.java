@@ -19,4 +19,14 @@ public class ChessboardTest {
         assertThrows(IllegalArgumentException.class, ()-> chessboard = new ChessboardImpl(0));
     }
 
+    @Test
+    public void chessboardShouldNotAllowInvalidInitialKnightPosition(){
+        assertThrows(IllegalArgumentException.class, () -> chessboard.placeKnight(new KnightImpl(new Pair<>(BOARD_SIZE, BOARD_SIZE))));
+    }
+
+    @Test
+    public void chessboardShouldNotAllowInvalidInitialPawnPosition(){
+        assertThrows(IllegalArgumentException.class, () -> chessboard.placePawn(new Pawn(new Pair<>(BOARD_SIZE, BOARD_SIZE))));
+    }
+
 }
