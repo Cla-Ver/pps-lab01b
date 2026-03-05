@@ -1,6 +1,6 @@
 package it.unibo.pps.e2;
 
-public interface Knight {
+public interface Knight extends Piece {
     /**
      *
      * Retrieves the knight's position
