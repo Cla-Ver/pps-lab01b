@@ -5,7 +5,7 @@ import java.util.*;
 public class LogicsImpl implements Logics {
 	
 	private final Pair<Integer,Integer> pawn;
-	private Pair<Integer,Integer> knight;
+	private final Knight knight;
 	//private final Random random = new Random();
 	private final int size;
 	 
@@ -17,7 +17,7 @@ public class LogicsImpl implements Logics {
 
 	private LogicsImpl(int size, Pair<Integer, Integer> knightPosition, Pair<Integer, Integer> pawnPosition){
 		this.size = size;
-		this.knight = knightPosition;
+		this.knight = new KnightImpl(knightPosition);
 		this.pawn = pawnPosition;
 	}
 
@@ -84,18 +84,18 @@ public class LogicsImpl implements Logics {
 			throw new IndexOutOfBoundsException();
 		}
 		// Below a compact way to express allowed moves for the knight
-		int x = row-this.knight.getX();
-		int y = col-this.knight.getY();
+		int x = row-this.knight.getPosition().getX();
+		int y = col-this.knight.getPosition().getY();
 		if (x!=0 && y!=0 && Math.abs(x)+Math.abs(y)==3) {
-			this.knight = new Pair<>(row,col);
-			return this.pawn.equals(this.knight);
+			this.knight.move(KnightMove.from(x, y));
+			return this.pawn.equals(this.knight.getPosition());
 		}
 		return false;
 	}
 
 	@Override
 	public boolean hasKnight(int row, int col) {
-		return this.knight.equals(new Pair<>(row,col));
+		return this.knight.getPosition().equals(new Pair<>(row,col));
 	}
 
 	@Override
