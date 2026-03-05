@@ -29,7 +29,7 @@ public class ChessboardImpl implements Chessboard {
     }
 
     @Override
-    public int getChessboardSize() {
+    public int getSize() {
         return this.size;
     }
 

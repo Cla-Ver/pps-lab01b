@@ -1,7 +1,7 @@
 package it.unibo.pps.e2;
 
 public interface Chessboard {
-    int getChessboardSize();
+    int getSize();
     void placeKnight(Knight knight);
     void placePawn(Pawn pawn);
     boolean isKnightPlaced();
