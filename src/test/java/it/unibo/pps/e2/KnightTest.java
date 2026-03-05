@@ -11,7 +11,7 @@ public class KnightTest {
 
     @BeforeEach
     public void init() {
-        knight = new KnightImpl(0, 0);
+        knight = new KnightImpl(new Pair<>(0, 0));
     }
 
     @Test

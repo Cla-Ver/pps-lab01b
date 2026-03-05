@@ -4,8 +4,8 @@ public class KnightImpl implements Knight {
 
     private Pair<Integer, Integer> position;
 
-    public KnightImpl(int startX, int startY){
-        position = new Pair<>(startX, startY);
+    public KnightImpl(Pair<Integer, Integer> startPosition) {
+        position = startPosition;
     }
 
     @Override
