@@ -45,6 +45,9 @@ public class ChessboardImpl implements Chessboard {
 
     @Override
     public void placePawn(Pawn pawn) {
+        if(this.pawn != null){
+            throw new IllegalStateException("Pawn's position already set");
+        }
         validateInitialPosition(pawn.position());
         this.pawn = pawn;
     }

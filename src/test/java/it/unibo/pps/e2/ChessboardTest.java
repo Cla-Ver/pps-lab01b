@@ -35,4 +35,10 @@ public class ChessboardTest {
         assertThrows(IllegalStateException.class, () -> chessboard.placeKnight(new KnightImpl(new Pair<>(0, 0))));
     }
 
+    @Test
+    public void chessboardShouldNotAllowSettingInitialPawnPositionMoreThanOnce(){
+        chessboard.placePawn(new Pawn(new Pair<>(0, 0)));
+        assertThrows(IllegalStateException.class, () -> chessboard.placePawn(new Pawn(new Pair<>(0, 0))));
+    }
+
 }
