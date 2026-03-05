@@ -1,7 +1,7 @@
 package it.unibo.pps.e2;
 
 public class ChessboardImpl implements Chessboard {
-    private int size;
+    private final int size;
     private Knight knight;
     private Pawn pawn;
     private static final int MIN_BOARD_SIZE = 3;
@@ -22,6 +22,8 @@ public class ChessboardImpl implements Chessboard {
         }
     }
 
+
+
     @Override
     public boolean hasKnight() {
         return false;
@@ -34,6 +36,9 @@ public class ChessboardImpl implements Chessboard {
 
     @Override
     public void placeKnight(Knight knight) {
+        if(this.knight != null){
+            throw new IllegalStateException("Knight's position already set");
+        }
         validateInitialPosition(knight.getPosition());
         this.knight = knight;
     }
