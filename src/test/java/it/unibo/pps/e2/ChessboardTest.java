@@ -54,5 +54,11 @@ public class ChessboardTest {
         assertThrows(IllegalStateException.class, () -> chessboard.moveKnight(KnightMove.DOWN_RIGHT));
     }
 
+    @Test
+    public void chessboardShouldNotAllowKnightMovingOutOfBounds(){
+        chessboard.placeKnight(new KnightImpl(INITIAL_KNIGHT_POSITION));
+        chessboard.placePawn(new Pawn(INITIAL_PAWN_POSITION));
+        assertThrows(IllegalArgumentException.class, () -> chessboard.moveKnight(KnightMove.UP_LEFT));
+    }
 
 }

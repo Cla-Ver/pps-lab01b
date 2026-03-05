@@ -29,16 +29,6 @@ public class ChessboardImpl implements Chessboard {
     }
 
     @Override
-    public boolean hasKnight() {
-        return false;
-    }
-
-    @Override
-    public boolean hasPawn() {
-        return false;
-    }
-
-    @Override
     public void placeKnight(Knight knight) {
         if(this.knight != null){
             throw new IllegalStateException("Knight's position already set");
@@ -66,16 +56,6 @@ public class ChessboardImpl implements Chessboard {
         }
         validateKnightMove(move);
         knight.move(move);
-    }
-
-    @Override
-    public Pair<Integer, Integer> getKnightPosition() {
-        return null;
-    }
-
-    @Override
-    public Pair<Integer, Integer> getPawnPosition() {
-        return null;
     }
 
 }
