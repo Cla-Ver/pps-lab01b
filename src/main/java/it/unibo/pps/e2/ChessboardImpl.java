@@ -23,12 +23,12 @@ public class ChessboardImpl implements Chessboard {
     }
 
     @Override
-    public Knight getKnight() {
+    public Pair<Integer, Integer> getKnightPosition() {
         return null;
     }
 
     @Override
-    public Pawn getPawn() {
+    public Pair<Integer, Integer> getPawnPosition() {
         return null;
     }
 
