@@ -63,4 +63,14 @@ public class ChessboardImpl implements Chessboard {
         knight.move(move);
     }
 
+    @Override
+    public Pair<Integer, Integer> getKnightPosition() {
+        return knight.getPosition();
+    }
+
+    @Override
+    public Pair<Integer, Integer> getPawnPosition() {
+        return pawn.position();
+    }
+
 }
