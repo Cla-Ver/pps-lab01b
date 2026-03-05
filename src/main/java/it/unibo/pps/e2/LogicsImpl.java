@@ -6,14 +6,7 @@ public class LogicsImpl implements Logics {
 	
 	private final Pawn pawn;
 	private final Knight knight;
-	//private final Random random = new Random();
 	private final int size;
-	 
-    /*public LogicsImpl(int size){
-    	this.size = size;
-        this.pawn = this.randomEmptyPosition();
-        this.knight = this.randomEmptyPosition();
-    }*/
 
 	private LogicsImpl(int size, Pair<Integer, Integer> knightPosition, Pair<Integer, Integer> pawnPosition){
 		this.size = size;
