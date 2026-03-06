@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CellTest {
-    Cell cell;
+    private Cell cell;
 
     @Test
     public void hitShouldReturnTrueIfCellHasMine(){
@@ -19,4 +19,6 @@ public class CellTest {
         cell = new CellImpl(false);
         assertFalse(cell.hit());
     }
+
+
 }

@@ -1,7 +1,7 @@
 package it.unibo.pps.e3;
 
 public class CellImpl implements Cell {
-    private final boolean hasMine;
+    private boolean hasMine;
     public CellImpl(boolean hasMine) {
         this.hasMine = hasMine;
     }
@@ -9,5 +9,10 @@ public class CellImpl implements Cell {
     @Override
     public boolean hit() {
         return hasMine;
+    }
+
+    @Override
+    public void setMine(boolean isArmed) {
+        hasMine = isArmed;
     }
 }

@@ -9,4 +9,12 @@ public interface Cell {
      *
      * */
     boolean hit();
+    /**
+     *
+     * Arms the cell.
+     *
+     * @param isArmed whether the cell has a mine.
+     *
+     * */
+    void setMine(boolean isArmed);
 }
