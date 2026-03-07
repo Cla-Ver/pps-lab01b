@@ -1,7 +1,8 @@
 package it.unibo.pps.e3;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GridTest {
     private Grid grid;
@@ -21,4 +22,16 @@ public class GridTest {
         }
         assertEquals(N_MINES, nmines);
     }
+
+    @Test
+    public void gridShouldThrowExceptionOnHittingInvalidMinePosition(){
+        grid = new GridImpl(GRID_SIZE, N_MINES);
+        assertThrows(IllegalArgumentException.class, () -> grid.hitCell(new Pair<>(GRID_SIZE, GRID_SIZE)));
+    }
+
+    /*@Test
+    public void gridShouldBeClearIfOnlyMinesRemain(){
+        grid = new GridImpl(GRID_SIZE, 0);
+        assertTrue(grid.isClear());
+    }*/
 }
