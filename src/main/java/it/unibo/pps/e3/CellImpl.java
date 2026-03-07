@@ -1,25 +1,30 @@
 package it.unibo.pps.e3;
 
 public class CellImpl implements Cell {
-    private boolean hasMine;
+    private boolean mine;
+    private boolean hasBeenHit = false;
+
+
+    public boolean hasMine() {
+        return mine;
+    }
 
     public boolean hasBeenHit() {
         return hasBeenHit;
     }
 
-    private boolean hasBeenHit = false;
-    public CellImpl(boolean hasMine) {
-        this.hasMine = hasMine;
+    public CellImpl(boolean mine) {
+        this.mine = mine;
     }
 
     @Override
     public boolean hit() {
         hasBeenHit = true;
-        return hasMine;
+        return mine;
     }
 
     @Override
     public void setMine(boolean isArmed) {
-        hasMine = isArmed;
+        mine = isArmed;
     }
 }

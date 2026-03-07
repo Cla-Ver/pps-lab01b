@@ -3,9 +3,9 @@ package it.unibo.pps.e3;
 public interface Cell {
     /**
      *
-     * Checks whether the cell has a mine or not.
+     * Hits the cell and registers the hit.
      *
-     * @return true if the cell is armed.
+     * @return true if the cell was armed.
      *
      * */
     boolean hit();
@@ -18,6 +18,12 @@ public interface Cell {
      * */
     boolean hasBeenHit();
 
+    /**
+     * Checks if the cell has a mine, without registering the hit.
+     *
+     * @return if the cell has a mine.
+     * */
+    boolean hasMine();
     /**
      *
      * Arms the cell.
