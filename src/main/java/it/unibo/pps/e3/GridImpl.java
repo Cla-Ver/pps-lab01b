@@ -27,7 +27,7 @@ public class GridImpl implements Grid {
         int minesLeftToPlace = nMines;
         while(minesLeftToPlace > 0){
             Pair<Integer, Integer> cellPosition = new Pair<>(r.nextInt(this.size), r.nextInt(this.size));
-            if(!cells.get(cellPosition).hit()){
+            if(!cells.get(cellPosition).hasMine()){
                 cells.get(cellPosition).setMine(true);
                 minesLeftToPlace--;
             }
@@ -40,7 +40,6 @@ public class GridImpl implements Grid {
             throw new IllegalArgumentException("Invalid cell position");
         }
         return cells.get(position).hit();
-
     }
 
     @Override
