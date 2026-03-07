@@ -9,6 +9,15 @@ public interface Cell {
      *
      * */
     boolean hit();
+
+    /**
+     *
+     * Checks if the cell has already been hit.
+     *
+     * @return true if it has been hit at least once.
+     * */
+    boolean hasBeenHit();
+
     /**
      *
      * Arms the cell.

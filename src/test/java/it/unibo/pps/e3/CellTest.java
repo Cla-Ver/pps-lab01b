@@ -20,5 +20,12 @@ public class CellTest {
         assertFalse(cell.hit());
     }
 
+    @Test
+    public void cellShouldRegisterHit(){
+        cell = new CellImpl(false);
+        cell.hit();
+        assertTrue(cell.hasBeenHit());
+    }
+
 
 }
