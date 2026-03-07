@@ -29,9 +29,14 @@ public class GridTest {
         assertThrows(IllegalArgumentException.class, () -> grid.hitCell(new Pair<>(GRID_SIZE, GRID_SIZE)));
     }
 
-    /*@Test
+    @Test
     public void gridShouldBeClearIfOnlyMinesRemain(){
         grid = new GridImpl(GRID_SIZE, 0);
+        for(int row = 0; row < GRID_SIZE; row++){
+            for(int col = 0; col < GRID_SIZE; col++){
+                grid.hitCell(new Pair<>(col, row));
+            }
+        }
         assertTrue(grid.isClear());
-    }*/
+    }
 }

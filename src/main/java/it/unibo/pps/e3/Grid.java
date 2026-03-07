@@ -18,5 +18,5 @@ public interface Grid {
      * @return true if there are only mines.
      *
      * */
-    //boolean isClear();
+    boolean isClear();
 }

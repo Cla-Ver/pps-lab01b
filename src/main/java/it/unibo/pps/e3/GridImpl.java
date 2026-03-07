@@ -42,4 +42,9 @@ public class GridImpl implements Grid {
         return cells.get(position).hit();
 
     }
+
+    @Override
+    public boolean isClear() {
+        return cells.values().stream().allMatch(cell -> !cell.hasMine() && cell.hasBeenHit());
+    }
 }
