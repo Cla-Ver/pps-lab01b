@@ -31,11 +31,9 @@ public class GUI extends JFrame {
                 quitGame();
                 JOptionPane.showMessageDialog(this, "You lost!!");
             } else {
-                bt.setEnabled(false);
-                bt.setText(String.valueOf(logics.getAmountOfNearbyMines(pos)));
                 drawBoard();
             }
-            boolean isThereVictory = false; // call the logic here to ask if there is victory
+            boolean isThereVictory = logics.isGameWon(); // call the logic here to ask if there is victory
             if (isThereVictory){
                 quitGame();
                 JOptionPane.showMessageDialog(this, "You won!!");
@@ -50,6 +48,7 @@ public class GUI extends JFrame {
                 if (bt.isEnabled()){
                     final Pair<Integer,Integer> pos = buttons.get(bt);
                     // call the logic here to put/remove a flag
+                    logics.toggleFlag(pos);
                 }
                 drawBoard(); 
             }
@@ -76,8 +75,6 @@ public class GUI extends JFrame {
             // disable the button
             if(logics.hit(entry.getValue())){
                 entry.getKey().setText("*");
-            } else {
-                entry.getKey().setText(String.valueOf(logics.getAmountOfNearbyMines(entry.getValue())));
             }
             entry.getKey().setEnabled(false);
     	}
@@ -86,10 +83,17 @@ public class GUI extends JFrame {
 
     private void drawBoard() {
         for (var entry: this.buttons.entrySet()) {
-            if(logics.hasBeenHit(entry.getValue())){
-                entry.getKey().setEnabled(false);
-                entry.getKey().setText(String.valueOf(logics.getAmountOfNearbyMines(entry.getValue())));
+            var button = entry.getKey();
+            if(logics.isFlagged(entry.getValue())){
+                button.setText("F");
+            } else {
+                button.setText("");
             }
+            if(logics.hasBeenHit(entry.getValue()) || logics.isGameOver()){
+                button.setEnabled(false);
+                button.setText(String.valueOf(logics.getAmountOfNearbyMines(entry.getValue())));
+            }
+
             // call the logic here
             // if this button is a cell with counter, put the number
             // if this button has a flag, put the flag
