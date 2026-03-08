@@ -10,6 +10,12 @@ public class GridTest {
     private static final int N_MINES = 5;
 
     @Test
+    public void gridShouldHaveCorrectNumberOfCells(){
+        grid = new GridImpl(GRID_SIZE, N_MINES);
+        assertEquals(GRID_SIZE * GRID_SIZE, grid.getNumberOfCells());
+    }
+
+    @Test
     public void gridShouldHaveEnoughMines(){
         grid = new GridImpl(GRID_SIZE, N_MINES);
         int nmines = 0;

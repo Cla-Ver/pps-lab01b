@@ -35,6 +35,11 @@ public class GridImpl implements Grid {
     }
 
     @Override
+    public long getNumberOfCells() {
+        return cells.size();
+    }
+
+    @Override
     public boolean hitCell(Pair<Integer, Integer> position) {
         if(!cells.containsKey(position)){
             throw new IllegalArgumentException("Invalid cell position");

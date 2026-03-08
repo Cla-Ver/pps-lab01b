@@ -3,6 +3,15 @@ package it.unibo.pps.e3;
 public interface Grid {
     /**
      *
+     * Retrieves the number of the grid cells.
+     *
+     * @return the number of the grid cells.
+     *
+     *
+     */
+    long getNumberOfCells();
+    /**
+     *
      * Hits a cell of the minefield.
      *
      * @return true if the cell is a mine.
