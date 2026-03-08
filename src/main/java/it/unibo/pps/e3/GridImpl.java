@@ -62,7 +62,7 @@ public class GridImpl implements Grid {
 
     @Override
     public boolean hitCell(Pair<Integer, Integer> position) {
-        checkCellExistance(position);
+        checkCellExistence(position);
         if(getNumberOfNearbyMines(position) == 0){
             hitNeighbors(position);
         }
@@ -87,13 +87,13 @@ public class GridImpl implements Grid {
 
     @Override
     public boolean hasBeenHit(Pair<Integer, Integer> position) {
-        checkCellExistance(position);
+        checkCellExistence(position);
         return cells.get(position).hasBeenHit();
     }
 
     @Override
     public void toggleFlag(Pair<Integer, Integer> flaggedCell) {
-        checkCellExistance(flaggedCell);
+        checkCellExistence(flaggedCell);
         cells.get(flaggedCell).toggleFlag();
     }
 
@@ -116,7 +116,7 @@ public class GridImpl implements Grid {
         });
     }
 
-    private void checkCellExistance(Pair<Integer, Integer> position){
+    private void checkCellExistence(Pair<Integer, Integer> position){
         if(!cells.containsKey(position)){
             throw new IllegalArgumentException("A cell at position " + position + " has not been found");
         }
