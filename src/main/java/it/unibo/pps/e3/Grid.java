@@ -48,4 +48,17 @@ public interface Grid {
      *
      */
     long getNumberOfNearbyMines(Pair<Integer, Integer> integerIntegerPair);
+
+    /**
+     *
+     * Checks if the cell in the given position has already been hit at least once.
+     *
+     * @param position The position to check.
+     * @throws IllegalArgumentException If the cell does not exist.
+     * @return True if the cell has been hit at least once.
+     *
+     * */
+    boolean hasBeenHit(Pair<Integer, Integer> position);
+
+
 }

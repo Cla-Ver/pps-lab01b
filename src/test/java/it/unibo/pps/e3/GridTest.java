@@ -78,6 +78,14 @@ public class GridTest {
         Pair<Integer, Integer> mine1 = new Pair<>(1, 0);
         Pair<Integer, Integer> mine2 = new Pair<>(0, 1);
         grid = new GridImpl(GRID_SIZE, 2, List.of(mine1, mine2));
-        assertEquals(2, grid.getNumberOfNearbyMines(new Pair<Integer, Integer>(0, 0)));
+        assertEquals(2, grid.getNumberOfNearbyMines(new Pair<>(0, 0)));
+    }
+
+    @Test
+    public void gridShouldCheckForHitCells(){
+        Pair<Integer, Integer> cellPosition = new Pair<>(0, 0);
+        grid = new GridImpl(GRID_SIZE, N_MINES);
+        grid.hitCell(cellPosition);
+        assertTrue(grid.hasBeenHit(cellPosition));
     }
 }

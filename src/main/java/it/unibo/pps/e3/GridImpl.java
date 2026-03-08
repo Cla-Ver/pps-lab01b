@@ -84,6 +84,14 @@ public class GridImpl implements Grid {
         return neighbors.stream().filter(Cell::hasMine).count();
     }
 
+    @Override
+    public boolean hasBeenHit(Pair<Integer, Integer> position) {
+        if(!cells.containsKey(position)){
+            throw new IllegalArgumentException("A cell at position " + position + " has not been found");
+        }
+        return cells.get(position).hasBeenHit();
+    }
+
     private Collection<Cell> getNeighbors(Pair<Integer, Integer> position){
         return cells.entrySet().stream()
                 .filter(pairCellEntry -> pairCellEntry.getKey().getX() >= position.getX()-1 && pairCellEntry.getKey().getX() <= position.getX() + 1 && pairCellEntry.getKey().getY() >= position.getY() - 1 && pairCellEntry.getKey().getY() <= position.getY() + 1)
