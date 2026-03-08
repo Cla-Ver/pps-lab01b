@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,7 +20,7 @@ public class GridTest {
     }
 
     @Test
-    public void gridShouldHaveEnoughMines(){
+    public void gridShouldHaveEnoughRandomMines(){
         grid = new GridImpl(GRID_SIZE, N_MINES);
         assertEquals(N_MINES, grid.getNumberOfMines());
     }
@@ -37,6 +38,12 @@ public class GridTest {
         minesList.add(minePosition);
         grid = new GridImpl(GRID_SIZE, N_MINES, minesList);
         assertTrue(grid.hitCell(minePosition));
+    }
+
+    @Test
+    public void gridShouldHaveCorrectNumberOfRandomAndGivenMines(){
+        Pair<Integer, Integer> minePosition = new Pair<>(0, 0);
+        grid = new GridImpl(GRID_SIZE, N_MINES, List.of(minePosition));
     }
 
     @Test

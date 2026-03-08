@@ -17,7 +17,7 @@ public class GridImpl implements Grid {
         cells = new HashMap<>();
         generateGrid(gridSize);
         minesPositions.forEach(this::placeMine);
-        placeRandomMines(nMines);
+        placeRandomMines(nMines - minesPositions.size());
     }
 
     private void generateGrid(int size){
