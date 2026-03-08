@@ -27,5 +27,20 @@ public class CellTest {
         assertTrue(cell.hasBeenHit());
     }
 
+    @Test
+    public void cellShouldBeFlaggable(){
+        cell = new CellImpl(false);
+        cell.toggleFlag();
+        assertTrue(cell.hasFlag());
+    }
+
+    @Test
+    public void cellShouldRemoveFlagIfFlaggedTwice(){
+        cell = new CellImpl(false);
+        cell.toggleFlag();
+        cell.toggleFlag();
+        assertFalse(cell.hasFlag());
+    }
+
 
 }

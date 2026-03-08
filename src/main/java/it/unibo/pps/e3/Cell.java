@@ -32,4 +32,19 @@ public interface Cell {
      *
      * */
     void setMine(boolean isArmed);
+
+    /**
+     *
+     * Puts a flag on the cell if it has none and vice versa.
+     * */
+    void toggleFlag();
+
+    /**
+     *
+     * Checks if the cell has a flag.
+     *
+     * @return True if the cell is flagged.
+     *
+     * */
+    boolean hasFlag();
 }
