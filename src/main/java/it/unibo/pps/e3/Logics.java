@@ -20,4 +20,13 @@ public interface Logics {
      * */
     long countMines();
 
+    /**
+     *
+     * Hits the cell in the given position.
+     *
+     * @return True if the cell is armed (there is a mine).
+     * @throws IllegalArgumentException if the position is out of bounds.
+     *
+     * */
+    boolean hit(Pair<Integer, Integer> minePosition);
 }

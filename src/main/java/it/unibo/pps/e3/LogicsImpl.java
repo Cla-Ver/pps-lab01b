@@ -17,4 +17,9 @@ public class LogicsImpl implements Logics {
     public long countMines() {
         return grid.getNumberOfMines();
     }
+
+    @Override
+    public boolean hit(Pair<Integer, Integer> minePosition) {
+        return grid.hitCell(minePosition);
+    }
 }

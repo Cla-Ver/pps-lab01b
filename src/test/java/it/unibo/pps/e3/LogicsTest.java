@@ -3,7 +3,10 @@ package it.unibo.pps.e3;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LogicsTest {
     private Logics logics;
@@ -26,8 +29,11 @@ public class LogicsTest {
     }
 
     @Test
-    public void logicsShouldProperlyHit(){
-
+    public void logicsShouldProperlyHitMine(){
+        Pair<Integer, Integer> minePosition = new Pair<>(0, 0);
+        logics = new LogicsImpl(new GridImpl(GRID_SIZE, 1, List.of(minePosition)));
+        assertTrue(logics.hit(minePosition));
     }
+
 
 }
