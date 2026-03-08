@@ -97,6 +97,11 @@ public class GridImpl implements Grid {
         cells.get(flaggedCell).toggleFlag();
     }
 
+    @Override
+    public boolean isFlagged(Pair<Integer, Integer> position) {
+        return cells.get(position).hasFlag();
+    }
+
     private Collection<Pair<Pair<Integer, Integer>, Cell>> getNeighbors(Pair<Integer, Integer> position){
         return cells.entrySet().stream()
                 .filter(pairCellEntry -> pairCellEntry.getKey().getX() >= position.getX()-1 && pairCellEntry.getKey().getX() <= position.getX() + 1 && pairCellEntry.getKey().getY() >= position.getY() - 1 && pairCellEntry.getKey().getY() <= position.getY() + 1)

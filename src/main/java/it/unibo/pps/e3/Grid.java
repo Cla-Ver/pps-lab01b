@@ -68,4 +68,14 @@ public interface Grid {
      * @throws IllegalArgumentException If the cell does not exist.
      * */
     void toggleFlag(Pair<Integer, Integer> flaggedCell);
+
+    /**
+     *
+     * Checks if the cell in the given position has a flag.
+     * @param position The position of the cell to check.
+     * @throws IllegalArgumentException If the cell does not exist.
+     * @return True if the cell is flagged.
+     *
+     * */
+    boolean isFlagged(Pair<Integer, Integer> position);
 }

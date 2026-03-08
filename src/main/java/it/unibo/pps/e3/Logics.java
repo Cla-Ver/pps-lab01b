@@ -69,4 +69,22 @@ public interface Logics {
      *
      * */
     boolean isGameOver();
+
+    /**
+     *
+     * Adds or removes a flag on the given position.
+     *
+     * @param flagPosition The position where to put the flag.
+     * @throws IllegalArgumentException If the cell does not exist.
+     *
+     * */
+    void toggleFlag(Pair<Integer, Integer> flagPosition);
+
+    /**
+     *
+     * Checks if the cell in a given position is flagged.
+     * @throws IllegalArgumentException If the cell does not exist.
+     * @return True if it has a flag.
+     * */
+    boolean isFlagged(Pair<Integer, Integer> position);
 }

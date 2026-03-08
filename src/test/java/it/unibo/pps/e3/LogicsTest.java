@@ -72,4 +72,12 @@ public class LogicsTest {
         assertTrue(logics.isGameOver());
     }
 
+    @Test
+    public void logicsShouldCheckFlaggedCells(){
+        Pair<Integer, Integer> flagPosition = new Pair<>(0, 0);
+        logics = new LogicsImpl(new GridImpl(GRID_SIZE, N_MINES));
+        logics.toggleFlag(flagPosition);
+        assertTrue(logics.isFlagged(flagPosition));
+    }
+
 }

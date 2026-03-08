@@ -45,4 +45,14 @@ public class LogicsImpl implements Logics {
         return this.isGameOver;
     }
 
+    @Override
+    public void toggleFlag(Pair<Integer, Integer> flagPosition) {
+        grid.toggleFlag(flagPosition);
+    }
+
+    @Override
+    public boolean isFlagged(Pair<Integer, Integer> position) {
+        return grid.isFlagged(position);
+    }
+
 }
