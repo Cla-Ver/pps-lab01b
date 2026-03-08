@@ -1,17 +1,22 @@
 package it.unibo.pps.e3;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class GridImpl implements Grid {
     private final Map<Pair<Integer, Integer>, Cell> cells;
     private final int size;
     Random r = new Random();
+
     public GridImpl(int gridSize, int nMines) {
+        this(gridSize, nMines, List.of());
+    }
+
+    public GridImpl(int gridSize, int nMines, Collection<Pair<Integer, Integer>> minesPositions) {
+
         this.size = gridSize;
         cells = new HashMap<>();
         generateGrid(gridSize);
+        minesPositions.forEach(this::placeMine);
         placeRandomMines(nMines);
     }
 
@@ -28,10 +33,14 @@ public class GridImpl implements Grid {
         while(minesLeftToPlace > 0){
             Pair<Integer, Integer> cellPosition = new Pair<>(r.nextInt(this.size), r.nextInt(this.size));
             if(!cells.get(cellPosition).hasMine()){
-                cells.get(cellPosition).setMine(true);
+                placeMine(cellPosition);
                 minesLeftToPlace--;
             }
         }
+    }
+
+    private void placeMine(Pair<Integer, Integer> position){
+        cells.get(position).setMine(true);
     }
 
     @Override

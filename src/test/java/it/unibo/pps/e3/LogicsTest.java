@@ -25,4 +25,9 @@ public class LogicsTest {
         assertEquals(N_MINES, logics.countMines());
     }
 
+    @Test
+    public void logicsShouldProperlyHit(){
+
+    }
+
 }

@@ -2,6 +2,9 @@ package it.unibo.pps.e3;
 
 import org.junit.jupiter.api.Test;
 
+import java.sql.Array;
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GridTest {
@@ -25,6 +28,15 @@ public class GridTest {
     public void gridShouldThrowExceptionOnHittingInvalidMinePosition(){
         grid = new GridImpl(GRID_SIZE, N_MINES);
         assertThrows(IllegalArgumentException.class, () -> grid.hitCell(new Pair<>(GRID_SIZE, GRID_SIZE)));
+    }
+
+    @Test
+    public void gridShouldPositionMinesIfGiven(){
+        Pair<Integer, Integer> minePosition = new Pair<>(0, 0);
+        ArrayList<Pair<Integer, Integer>> minesList = new ArrayList<>();
+        minesList.add(minePosition);
+        grid = new GridImpl(GRID_SIZE, N_MINES, minesList);
+        assertTrue(grid.hitCell(minePosition));
     }
 
     @Test
