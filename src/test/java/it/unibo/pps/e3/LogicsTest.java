@@ -12,7 +12,7 @@ public class LogicsTest {
 
     @BeforeEach
     public void init(){
-        logics = new LogicsImpl(GRID_SIZE, N_MINES);
+        logics = new LogicsImpl(new GridImpl(GRID_SIZE, N_MINES));
     }
 
     @Test

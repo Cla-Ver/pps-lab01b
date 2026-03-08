@@ -18,15 +18,7 @@ public class GridTest {
     @Test
     public void gridShouldHaveEnoughMines(){
         grid = new GridImpl(GRID_SIZE, N_MINES);
-        int nmines = 0;
-        for(int row = 0; row < GRID_SIZE; row++){
-            for(int col = 0; col < GRID_SIZE; col++){
-                if(grid.hitCell(new Pair<>(row, col))){
-                    nmines++;
-                }
-            }
-        }
-        assertEquals(N_MINES, nmines);
+        assertEquals(N_MINES, grid.getNumberOfMines());
     }
 
     @Test

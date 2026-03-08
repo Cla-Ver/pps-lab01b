@@ -51,4 +51,9 @@ public class GridImpl implements Grid {
     public boolean isClear() {
         return cells.values().stream().allMatch(cell -> !cell.hasMine() && cell.hasBeenHit());
     }
+
+    @Override
+    public long getNumberOfMines() {
+        return cells.values().stream().filter(Cell::hasMine).count();
+    }
 }

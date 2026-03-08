@@ -10,6 +10,7 @@ public interface Grid {
      *
      */
     long getNumberOfCells();
+
     /**
      *
      * Hits a cell of the minefield.
@@ -28,4 +29,13 @@ public interface Grid {
      *
      * */
     boolean isClear();
+
+    /**
+     *
+     * Retrieves the number of mines of the field.
+     *
+     * @return The amount of mines.
+     *
+     */
+    long getNumberOfMines();
 }
