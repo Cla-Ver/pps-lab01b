@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class LogicsTest {
     private Logics logics;
@@ -33,6 +32,13 @@ public class LogicsTest {
         Pair<Integer, Integer> minePosition = new Pair<>(0, 0);
         logics = new LogicsImpl(new GridImpl(GRID_SIZE, 1, List.of(minePosition)));
         assertTrue(logics.hit(minePosition));
+    }
+
+    @Test
+    public void logicsShouldNotHitMineIfTheCellIsSafe(){
+        Pair<Integer, Integer> minePosition = new Pair<>(0, 0);
+        logics = new LogicsImpl(new GridImpl(GRID_SIZE, 1, List.of(minePosition)));
+        assertFalse(logics.hit(new Pair<>(GRID_SIZE - 1, GRID_SIZE - 1)));
     }
 
 
