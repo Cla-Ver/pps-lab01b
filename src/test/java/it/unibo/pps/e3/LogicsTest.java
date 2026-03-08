@@ -51,11 +51,12 @@ public class LogicsTest {
 
     @Test
     public void logicsShouldCheckForAlreadyHitCells(){
-
         logics = new LogicsImpl(new GridImpl(GRID_SIZE, N_MINES));
         Pair<Integer, Integer> hitPosition = new Pair<>(0, 0);
         logics.hit(hitPosition);
         assertTrue(logics.hasBeenHit(hitPosition));
     }
+
+    
 
 }

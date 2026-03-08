@@ -80,7 +80,7 @@ public class GridImpl implements Grid {
 
     @Override
     public long getNumberOfNearbyMines(Pair<Integer, Integer> position) {
-        List<Cell> neighbors = new ArrayList<>(getNeighbors(position));
+        List<Cell> neighbors = new ArrayList<>(getNeighbors(position).stream().map(Pair::getY).toList());
         return neighbors.stream().filter(Cell::hasMine).count();
     }
 
@@ -89,13 +89,26 @@ public class GridImpl implements Grid {
         if(!cells.containsKey(position)){
             throw new IllegalArgumentException("A cell at position " + position + " has not been found");
         }
+        hitNeighbors(position);
         return cells.get(position).hasBeenHit();
     }
 
-    private Collection<Cell> getNeighbors(Pair<Integer, Integer> position){
+    private Collection<Pair<Pair<Integer, Integer>, Cell>> getNeighbors(Pair<Integer, Integer> position){
         return cells.entrySet().stream()
                 .filter(pairCellEntry -> pairCellEntry.getKey().getX() >= position.getX()-1 && pairCellEntry.getKey().getX() <= position.getX() + 1 && pairCellEntry.getKey().getY() >= position.getY() - 1 && pairCellEntry.getKey().getY() <= position.getY() + 1)
-                .map(Map.Entry::getValue)
+                .map(entry -> new Pair<>(entry.getKey(), entry.getValue()))
                 .toList();
     }
+
+    private void hitNeighbors(Pair<Integer, Integer> center){
+        List<Pair<Pair<Integer, Integer>, Cell>> neighbors = new ArrayList<>(getNeighbors(center));
+        neighbors.forEach(neighbor -> {
+            if(!neighbor.getY().hasBeenHit() && getNumberOfNearbyMines(neighbor.getX()) == 0){
+                neighbor.getY().hit();
+                hitNeighbors(neighbor.getX());
+            }
+        });
+    }
+
+
 }

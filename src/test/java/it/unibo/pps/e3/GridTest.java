@@ -88,4 +88,14 @@ public class GridTest {
         grid.hitCell(cellPosition);
         assertTrue(grid.hasBeenHit(cellPosition));
     }
+
+    @Test
+    public void gridShouldRevealNearbyCellsIfZeroMinesNearby(){
+        Pair<Integer, Integer> cellPosition = new Pair<>(0, 0);
+        Pair<Integer, Integer> neighborEmptyCell = new Pair<>(1, 0);
+        Pair<Integer, Integer> minePosition = new Pair<>(GRID_SIZE - 1, GRID_SIZE - 1);
+        grid = new GridImpl(GRID_SIZE, 1, List.of(minePosition));
+        grid.hitCell(cellPosition);
+        assertTrue(grid.hasBeenHit(neighborEmptyCell));
+    }
 }
