@@ -65,6 +65,7 @@ public class GridImpl implements Grid {
         if(!cells.containsKey(position)){
             throw new IllegalArgumentException("Invalid cell position");
         }
+        hitNeighbors(position);
         return cells.get(position).hit();
     }
 
@@ -89,7 +90,6 @@ public class GridImpl implements Grid {
         if(!cells.containsKey(position)){
             throw new IllegalArgumentException("A cell at position " + position + " has not been found");
         }
-        hitNeighbors(position);
         return cells.get(position).hasBeenHit();
     }
 
@@ -103,9 +103,11 @@ public class GridImpl implements Grid {
     private void hitNeighbors(Pair<Integer, Integer> center){
         List<Pair<Pair<Integer, Integer>, Cell>> neighbors = new ArrayList<>(getNeighbors(center));
         neighbors.forEach(neighbor -> {
-            if(!neighbor.getY().hasBeenHit() && getNumberOfNearbyMines(neighbor.getX()) == 0){
+            if(!neighbor.getY().hasBeenHit()){
                 neighbor.getY().hit();
-                hitNeighbors(neighbor.getX());
+                if(getNumberOfNearbyMines(neighbor.getX()) == 0){
+                    hitNeighbors(neighbor.getX());
+                }
             }
         });
     }
