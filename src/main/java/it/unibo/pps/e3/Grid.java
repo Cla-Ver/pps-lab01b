@@ -38,4 +38,14 @@ public interface Grid {
      *
      */
     long getNumberOfMines();
+
+    /**
+     *
+     * Retrieves the number of adjacent mines given the position in a 3*3 square.
+     *
+     * @return The amount of mines.
+     *
+     *
+     */
+    long getNumberOfNearbyMines(Pair<Integer, Integer> integerIntegerPair);
 }

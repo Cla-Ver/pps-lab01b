@@ -62,4 +62,12 @@ public class GridTest {
         }
         assertTrue(grid.isClear());
     }
+
+    @Test
+    public void gridShouldReturnNumberOfNearbyMines(){
+        Pair<Integer, Integer> mine1 = new Pair<>(1, 0);
+        Pair<Integer, Integer> mine2 = new Pair<>(0, 1);
+        grid = new GridImpl(GRID_SIZE, 2, List.of(mine1, mine2));
+        assertEquals(2, grid.getNumberOfNearbyMines(new Pair<Integer, Integer>(0, 0)));
+    }
 }

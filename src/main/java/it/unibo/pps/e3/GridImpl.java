@@ -66,4 +66,17 @@ public class GridImpl implements Grid {
     public long getNumberOfMines() {
         return cells.values().stream().filter(Cell::hasMine).count();
     }
+
+    @Override
+    public long getNumberOfNearbyMines(Pair<Integer, Integer> position) {
+        List<Cell> neighbors = new ArrayList<>(getNeighbors(position));
+        return neighbors.stream().filter(Cell::hasMine).count();
+    }
+
+    private Collection<Cell> getNeighbors(Pair<Integer, Integer> position){
+        return cells.entrySet().stream()
+                .filter(pairCellEntry -> pairCellEntry.getKey().getX() >= position.getX()-1 && pairCellEntry.getKey().getX() <= position.getX() + 1 && pairCellEntry.getKey().getY() >= position.getY() - 1 && pairCellEntry.getKey().getY() <= position.getY() + 1)
+                .map(Map.Entry::getValue)
+                .toList();
+    }
 }
