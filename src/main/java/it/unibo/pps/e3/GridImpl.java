@@ -62,9 +62,7 @@ public class GridImpl implements Grid {
 
     @Override
     public boolean hitCell(Pair<Integer, Integer> position) {
-        if(!cells.containsKey(position)){
-            throw new IllegalArgumentException("Invalid cell position");
-        }
+        checkCellExistance(position);
         if(getNumberOfNearbyMines(position) == 0){
             hitNeighbors(position);
         }
@@ -89,10 +87,14 @@ public class GridImpl implements Grid {
 
     @Override
     public boolean hasBeenHit(Pair<Integer, Integer> position) {
-        if(!cells.containsKey(position)){
-            throw new IllegalArgumentException("A cell at position " + position + " has not been found");
-        }
+        checkCellExistance(position);
         return cells.get(position).hasBeenHit();
+    }
+
+    @Override
+    public void toggleFlag(Pair<Integer, Integer> flaggedCell) {
+        checkCellExistance(flaggedCell);
+        cells.get(flaggedCell).toggleFlag();
     }
 
     private Collection<Pair<Pair<Integer, Integer>, Cell>> getNeighbors(Pair<Integer, Integer> position){
@@ -105,7 +107,7 @@ public class GridImpl implements Grid {
     private void hitNeighbors(Pair<Integer, Integer> center){
         List<Pair<Pair<Integer, Integer>, Cell>> neighbors = new ArrayList<>(getNeighbors(center));
         neighbors.forEach(neighbor -> {
-            if(!neighbor.getY().hasBeenHit()){
+            if(!neighbor.getY().hasBeenHit() && !neighbor.getY().hasFlag()){
                 neighbor.getY().hit();
                 if(getNumberOfNearbyMines(neighbor.getX()) == 0){
                     hitNeighbors(neighbor.getX());
@@ -114,5 +116,10 @@ public class GridImpl implements Grid {
         });
     }
 
+    private void checkCellExistance(Pair<Integer, Integer> position){
+        if(!cells.containsKey(position)){
+            throw new IllegalArgumentException("A cell at position " + position + " has not been found");
+        }
+    }
 
 }

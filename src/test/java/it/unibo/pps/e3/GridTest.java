@@ -97,4 +97,15 @@ public class GridTest {
         grid.hitCell(cellPosition);
         assertTrue(grid.hasBeenHit(neighborEmptyCell));
     }
+
+    @Test
+    public void shouldNotAutoexpandFlaggedCells(){
+
+        grid = new GridImpl(GRID_SIZE, 0);
+        Pair<Integer, Integer> flaggedCell = new Pair<>(0, 0);
+        grid.toggleFlag(flaggedCell);
+        grid.hitCell(new Pair<>(1, 0));
+        assertFalse(grid.hasBeenHit(flaggedCell));
+
+    }
 }

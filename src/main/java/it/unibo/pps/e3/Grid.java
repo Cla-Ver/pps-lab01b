@@ -61,4 +61,11 @@ public interface Grid {
     boolean hasBeenHit(Pair<Integer, Integer> position);
 
 
+    /**
+     *
+     * Adds or removes a flag on the cell with the corresponding position.
+     *
+     * @throws IllegalArgumentException If the cell does not exist.
+     * */
+    void toggleFlag(Pair<Integer, Integer> flaggedCell);
 }
