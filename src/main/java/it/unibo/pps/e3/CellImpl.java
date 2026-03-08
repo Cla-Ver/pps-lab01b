@@ -3,7 +3,7 @@ package it.unibo.pps.e3;
 public class CellImpl implements Cell {
     private boolean mine;
     private boolean hasBeenHit = false;
-    private boolean hasFlag = false;
+    private boolean flagged = false;
 
     public boolean hasMine() {
         return mine;
@@ -30,11 +30,11 @@ public class CellImpl implements Cell {
 
     @Override
     public void toggleFlag() {
-        this.hasFlag = !this.hasFlag;
+        this.flagged = !this.flagged;
     }
 
     @Override
     public boolean hasFlag() {
-        return this.hasFlag;
+        return this.flagged;
     }
 }
