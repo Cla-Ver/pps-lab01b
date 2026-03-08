@@ -3,7 +3,7 @@ package it.unibo.pps.e3;
 import java.util.*;
 
 public class GridImpl implements Grid {
-    private final Map<Pair<Integer, Integer>, Cell> cells;
+    private final Map<Pair<Integer, Integer>, Cell> cells = new HashMap<>();
     private final int size;
     Random r = new Random();
 
@@ -12,9 +12,10 @@ public class GridImpl implements Grid {
     }
 
     public GridImpl(int gridSize, int nMines, Collection<Pair<Integer, Integer>> minesPositions) {
-
+        if(minesPositions.size() > nMines){
+            throw new IllegalArgumentException("The amount of mines given is larger than the number of allowed mines on the field");
+        }
         this.size = gridSize;
-        cells = new HashMap<>();
         generateGrid(gridSize);
         minesPositions.forEach(this::placeMine);
         placeRandomMines(nMines - minesPositions.size());

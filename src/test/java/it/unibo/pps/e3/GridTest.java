@@ -47,6 +47,12 @@ public class GridTest {
     }
 
     @Test
+    public void gridShouldThrowExceptionIfListIsLargerThanNumberOfMines(){
+        Pair<Integer, Integer> minePosition = new Pair<>(0, 0);
+        assertThrows(IllegalArgumentException.class, () -> grid = new GridImpl(GRID_SIZE, 0, List.of(minePosition)));
+    }
+
+    @Test
     public void gridShouldBeClearIfOnlyMinesRemain(){
         grid = new GridImpl(GRID_SIZE, 0);
         for(int row = 0; row < GRID_SIZE; row++){
