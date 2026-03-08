@@ -27,4 +27,9 @@ public class LogicsImpl implements Logics {
     public long getAmountOfNearbyMines(Pair<Integer, Integer> center) {
         return grid.getNumberOfNearbyMines(center);
     }
+
+    @Override
+    public boolean hasBeenHit(Pair<Integer, Integer> hitPosition) {
+        return grid.hasBeenHit(hitPosition);
+    }
 }

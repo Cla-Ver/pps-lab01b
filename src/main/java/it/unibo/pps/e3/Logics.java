@@ -40,4 +40,15 @@ public interface Logics {
      *
      */
     long getAmountOfNearbyMines(Pair<Integer, Integer> center);
+
+    /**
+     *
+     * Checks if the cell in the specified position has already been hit.
+     *
+     * @param hitPosition The position to check.
+     * @return True if it has already been hit at least once.
+     * @throws IllegalArgumentException if no cell is found in the provided position.
+     *
+     * */
+    boolean hasBeenHit(Pair<Integer, Integer> hitPosition);
 }
