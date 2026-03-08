@@ -11,7 +11,7 @@ public class GridImpl implements Grid {
         this(gridSize, nMines, List.of());
     }
 
-    public GridImpl(int gridSize, int nMines, Collection<Pair<Integer, Integer>> minesPositions) {
+    private void validateMineAmount(int gridSize, int nMines, Collection<Pair<Integer, Integer>> minesPositions){
         if(nMines < 0){
             throw new IllegalArgumentException("Invalid amount of mines");
         }
@@ -21,6 +21,11 @@ public class GridImpl implements Grid {
         if(minesPositions.size() > nMines){
             throw new IllegalArgumentException("The amount of mines given is larger than the number of allowed mines on the field");
         }
+
+    }
+
+    public GridImpl(int gridSize, int nMines, Collection<Pair<Integer, Integer>> minesPositions) {
+        validateMineAmount(gridSize, nMines, minesPositions);
         this.size = gridSize;
         generateGrid(gridSize);
         minesPositions.forEach(this::placeMine);
