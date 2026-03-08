@@ -24,9 +24,20 @@ public interface Logics {
      *
      * Hits the cell in the given position.
      *
+     * @param minePosition the position to hit.
      * @return True if the cell is armed (there is a mine).
      * @throws IllegalArgumentException if the position is out of bounds.
      *
      * */
     boolean hit(Pair<Integer, Integer> minePosition);
+
+    /**
+     *
+     * Returns the number of mines (armed cells) from the given position.
+     *
+     * @param center The center of the 3*3 square to check.
+     * @return The amount of mines found.
+     *
+     */
+    long getAmountOfNearbyMines(Pair<Integer, Integer> center);
 }

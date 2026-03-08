@@ -41,5 +41,12 @@ public class LogicsTest {
         assertFalse(logics.hit(new Pair<>(GRID_SIZE - 1, GRID_SIZE - 1)));
     }
 
+    @Test
+    public void logicsShouldReturnMinesInTheNeighborhood(){
+        Pair<Integer, Integer> mine1 = new Pair<>(1, 0);
+        Pair<Integer, Integer> mine2 = new Pair<>(0, 1);
+        logics = new LogicsImpl(new GridImpl(GRID_SIZE, 2, List.of(mine1, mine2)));
+        assertEquals(2, logics.getAmountOfNearbyMines(new Pair<>(0, 0)));
+    }
 
 }
