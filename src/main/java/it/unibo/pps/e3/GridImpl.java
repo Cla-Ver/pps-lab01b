@@ -65,7 +65,9 @@ public class GridImpl implements Grid {
         if(!cells.containsKey(position)){
             throw new IllegalArgumentException("Invalid cell position");
         }
-        hitNeighbors(position);
+        if(getNumberOfNearbyMines(position) == 0){
+            hitNeighbors(position);
+        }
         return cells.get(position).hit();
     }
 

@@ -64,4 +64,12 @@ public class LogicsTest {
         assertTrue(logics.isGameWon());
     }
 
+    @Test
+    public void gameShouldBeOverIfMineIsRevealed(){
+        Pair<Integer, Integer> mine = new Pair<>(0, 0);
+        logics = new LogicsImpl(new GridImpl(GRID_SIZE, 1, List.of(mine)));
+        logics.hit(mine);
+        assertTrue(logics.isGameOver());
+    }
+
 }

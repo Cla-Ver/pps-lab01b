@@ -60,4 +60,13 @@ public interface Logics {
      *
      * */
     boolean isGameWon();
+
+    /**
+     *
+     * Checks if the game is over, either because of a revealed mine or because the player has won.
+     *
+     * @return True if the game has ended.
+     *
+     * */
+    boolean isGameOver();
 }

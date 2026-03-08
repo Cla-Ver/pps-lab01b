@@ -22,7 +22,7 @@ public class LogicsImpl implements Logics {
     @Override
     public boolean hit(Pair<Integer, Integer> minePosition) {
         isGameOver = grid.hitCell(minePosition);
-        return grid.hitCell(minePosition);
+        return isGameOver;
     }
 
     @Override
@@ -38,6 +38,11 @@ public class LogicsImpl implements Logics {
     @Override
     public boolean isGameWon() {
         return grid.isClear();
+    }
+
+    @Override
+    public boolean isGameOver() {
+        return this.isGameOver;
     }
 
 }
