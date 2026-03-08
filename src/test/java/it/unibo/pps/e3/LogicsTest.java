@@ -57,6 +57,11 @@ public class LogicsTest {
         assertTrue(logics.hasBeenHit(hitPosition));
     }
 
-    
+    @Test
+    public void logicsShouldCheckOnGameWinIfEveryNonMineCellIsRevealed(){
+        logics = new LogicsImpl(new GridImpl(GRID_SIZE, 0));
+        logics.hit(new Pair<>(0, 0));
+        assertTrue(logics.isGameWon());
+    }
 
 }

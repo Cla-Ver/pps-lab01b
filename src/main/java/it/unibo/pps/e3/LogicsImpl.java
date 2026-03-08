@@ -3,6 +3,7 @@ package it.unibo.pps.e3;
 public class LogicsImpl implements Logics {
 
     private final Grid grid;
+    private boolean isGameOver = false;
 
     public LogicsImpl(Grid grid) {
         this.grid = grid;
@@ -20,6 +21,7 @@ public class LogicsImpl implements Logics {
 
     @Override
     public boolean hit(Pair<Integer, Integer> minePosition) {
+        isGameOver = grid.hitCell(minePosition);
         return grid.hitCell(minePosition);
     }
 
@@ -32,4 +34,10 @@ public class LogicsImpl implements Logics {
     public boolean hasBeenHit(Pair<Integer, Integer> hitPosition) {
         return grid.hasBeenHit(hitPosition);
     }
+
+    @Override
+    public boolean isGameWon() {
+        return grid.isClear();
+    }
+
 }

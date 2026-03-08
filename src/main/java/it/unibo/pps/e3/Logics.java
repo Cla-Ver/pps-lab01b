@@ -51,4 +51,13 @@ public interface Logics {
      *
      * */
     boolean hasBeenHit(Pair<Integer, Integer> hitPosition);
+
+    /**
+     *
+     * Checks if the game is won.
+     *
+     * @return True if the player has won the game.
+     *
+     * */
+    boolean isGameWon();
 }
