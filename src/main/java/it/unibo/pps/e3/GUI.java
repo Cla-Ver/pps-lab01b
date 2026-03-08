@@ -32,7 +32,8 @@ public class GUI extends JFrame {
                 JOptionPane.showMessageDialog(this, "You lost!!");
             } else {
                 bt.setEnabled(false);
-                drawBoard();            	
+                bt.setText(String.valueOf(logics.getAmountOfNearbyMines(pos)));
+                drawBoard();
             }
             boolean isThereVictory = false; // call the logic here to ask if there is victory
             if (isThereVictory){
@@ -76,7 +77,7 @@ public class GUI extends JFrame {
             if(logics.hit(entry.getValue())){
                 entry.getKey().setText("*");
             } else {
-                entry.getKey().setText("0");
+                entry.getKey().setText(String.valueOf(logics.getAmountOfNearbyMines(entry.getValue())));
             }
             entry.getKey().setEnabled(false);
     	}
