@@ -5,13 +5,19 @@ import java.util.*;
 public class GridImpl implements Grid {
     private final Map<Pair<Integer, Integer>, Cell> cells = new HashMap<>();
     private final int size;
-    Random r = new Random();
+    private final Random r = new Random();
 
     public GridImpl(int gridSize, int nMines) {
         this(gridSize, nMines, List.of());
     }
 
     public GridImpl(int gridSize, int nMines, Collection<Pair<Integer, Integer>> minesPositions) {
+        if(nMines < 0){
+            throw new IllegalArgumentException("Invalid amount of mines");
+        }
+        if(nMines >= gridSize * gridSize){
+            throw new IllegalArgumentException("The amount of mines must be less than the total amount of squares (gridSize^2)");
+        }
         if(minesPositions.size() > nMines){
             throw new IllegalArgumentException("The amount of mines given is larger than the number of allowed mines on the field");
         }

@@ -20,6 +20,16 @@ public class GridTest {
     }
 
     @Test
+    public void gridShouldThrowExceptionIfMineAmountIsNegative(){
+        assertThrows(IllegalArgumentException.class, () -> grid = new GridImpl(GRID_SIZE, -1));
+    }
+
+    @Test
+    public void gridShouldThrowExceptionIfMineAmountIsEqualOrLargerThanCellAmount(){
+        assertThrows(IllegalArgumentException.class, () -> grid = new GridImpl(GRID_SIZE, GRID_SIZE * GRID_SIZE + 1));
+    }
+
+    @Test
     public void gridShouldHaveEnoughRandomMines(){
         grid = new GridImpl(GRID_SIZE, N_MINES);
         assertEquals(N_MINES, grid.getNumberOfMines());
