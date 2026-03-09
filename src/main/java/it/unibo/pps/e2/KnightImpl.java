@@ -9,7 +9,7 @@ public class KnightImpl implements Knight {
     }
 
     @Override
-    public Pair<Integer, Integer> getPosition() {
+    public Pair<Integer, Integer> position() {
         return this.position;
     }
 

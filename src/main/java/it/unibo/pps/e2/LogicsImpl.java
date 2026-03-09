@@ -30,7 +30,7 @@ public class LogicsImpl implements Logics {
 			}
 		}
 		public Builder knight(Knight knight){
-			checkInBoundsCreation(knight.getPosition());
+			checkInBoundsCreation(knight.position());
 			chessboard.placeKnight(knight);
 			return this;
 		}
