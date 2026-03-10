@@ -18,19 +18,19 @@ public class KnightTest {
     public void knightShouldMove(){
         final Pair<Integer, Integer> targetPosition = new Pair<>(1, 2);
         knight.move(KnightMove.DOWN_RIGHT);
-        assertEquals(targetPosition, knight.getPosition());
+        assertEquals(targetPosition, knight.position());
     }
 
     @Test
     public void knightShouldAllowNegativeYPosition(){
         knight.move(KnightMove.UP_RIGHT);
-        assertTrue(knight.getPosition().getY() < 0);
+        assertTrue(knight.position().getY() < 0);
     }
 
     @Test
     public void knightShouldAllowNegativeXPosition(){
         knight.move(KnightMove.LEFT_UP);
-        assertTrue(knight.getPosition().getX() < 0);
+        assertTrue(knight.position().getX() < 0);
     }
 
 }
