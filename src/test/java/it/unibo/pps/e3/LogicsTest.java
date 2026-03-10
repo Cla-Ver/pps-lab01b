@@ -80,4 +80,16 @@ public class LogicsTest {
         assertTrue(logics.isFlagged(flagPosition));
     }
 
+    @Test
+    public void logicsShouldRevealNearbyCellsIfZeroMinesNearby(){
+        Pair<Integer, Integer> cellPosition = new Pair<>(0, 0);
+        Pair<Integer, Integer> neighborEmptyCell = new Pair<>(1, 0);
+        Pair<Integer, Integer> minePosition = new Pair<>(GRID_SIZE - 1, GRID_SIZE - 1);
+        logics = new LogicsImpl(new GridImpl(GRID_SIZE, N_MINES, List.of(minePosition)));
+        logics.hit(cellPosition);
+        //grid.hitCell(cellPosition);
+        assertTrue(logics.hasBeenHit(neighborEmptyCell));
+    }
+
+
 }

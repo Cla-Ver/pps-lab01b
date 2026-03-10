@@ -77,7 +77,7 @@ public class GridTest {
         Pair<Integer, Integer> mine1 = new Pair<>(1, 0);
         Pair<Integer, Integer> mine2 = new Pair<>(0, 1);
         grid = new GridImpl(GRID_SIZE, 2, List.of(mine1, mine2));
-        assertEquals(2, grid.getNumberOfNearbyMines(new Pair<>(0, 0)));
+        assertEquals(2, grid.getAmountOfNearbyMines(new Pair<>(0, 0)));
     }
 
     @Test
@@ -88,15 +88,6 @@ public class GridTest {
         assertTrue(grid.hasBeenHit(cellPosition));
     }
 
-    @Test
-    public void gridShouldRevealNearbyCellsIfZeroMinesNearby(){
-        Pair<Integer, Integer> cellPosition = new Pair<>(0, 0);
-        Pair<Integer, Integer> neighborEmptyCell = new Pair<>(1, 0);
-        Pair<Integer, Integer> minePosition = new Pair<>(GRID_SIZE - 1, GRID_SIZE - 1);
-        grid = new GridImpl(GRID_SIZE, 1, List.of(minePosition));
-        grid.hitCell(cellPosition);
-        assertTrue(grid.hasBeenHit(neighborEmptyCell));
-    }
 
     @Test
     public void shouldNotAutoexpandFlaggedCells(){

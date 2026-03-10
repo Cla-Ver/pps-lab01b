@@ -1,5 +1,7 @@
 package it.unibo.pps.e3;
 
+import java.util.Collection;
+
 public interface Grid {
     /**
      *
@@ -47,7 +49,7 @@ public interface Grid {
      *
      *
      */
-    long getNumberOfNearbyMines(Pair<Integer, Integer> center);
+    long getAmountOfNearbyMines(Pair<Integer, Integer> center);
 
     /**
      *
@@ -78,4 +80,14 @@ public interface Grid {
      *
      * */
     boolean isFlagged(Pair<Integer, Integer> position);
+
+    /**
+     *
+     * Returns a collection containing the positions of the neighboring cells in a 1-cell radius from the given position.
+     * @param center the position from which the neighbors are considered.
+     *
+     * @return A collection containing the neighbors' positions.
+     *
+     * */
+    Collection<Pair<Integer, Integer>> getNeighborPositions(Pair<Integer, Integer> center);
 }

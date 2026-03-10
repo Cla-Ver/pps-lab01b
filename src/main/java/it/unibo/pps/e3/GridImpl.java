@@ -63,9 +63,6 @@ public class GridImpl implements Grid {
     @Override
     public boolean hitCell(Pair<Integer, Integer> position) {
         checkCellExistence(position);
-        if(getNumberOfNearbyMines(position) == 0){
-            hitNeighbors(position);
-        }
         return cells.get(position).hit();
     }
 
@@ -80,7 +77,7 @@ public class GridImpl implements Grid {
     }
 
     @Override
-    public long getNumberOfNearbyMines(Pair<Integer, Integer> center) {
+    public long getAmountOfNearbyMines(Pair<Integer, Integer> center) {
         List<Cell> neighbors = new ArrayList<>(getNeighbors(center).stream().map(Pair::getY).toList());
         return neighbors.stream().filter(Cell::hasMine).count();
     }
@@ -99,7 +96,14 @@ public class GridImpl implements Grid {
 
     @Override
     public boolean isFlagged(Pair<Integer, Integer> position) {
+        checkCellExistence(position);
         return cells.get(position).hasFlag();
+    }
+
+    public Collection<Pair<Integer, Integer>> getNeighborPositions(Pair<Integer, Integer> position) {
+        return getNeighbors(position).stream()
+                .map(Pair::getX)
+                .toList();
     }
 
     private Collection<Pair<Pair<Integer, Integer>, Cell>> getNeighbors(Pair<Integer, Integer> position){
@@ -107,18 +111,6 @@ public class GridImpl implements Grid {
                 .filter(pairCellEntry -> pairCellEntry.getKey().getX() >= position.getX()-1 && pairCellEntry.getKey().getX() <= position.getX() + 1 && pairCellEntry.getKey().getY() >= position.getY() - 1 && pairCellEntry.getKey().getY() <= position.getY() + 1)
                 .map(entry -> new Pair<>(entry.getKey(), entry.getValue()))
                 .toList();
-    }
-
-    private void hitNeighbors(Pair<Integer, Integer> center){
-        List<Pair<Pair<Integer, Integer>, Cell>> neighbors = new ArrayList<>(getNeighbors(center));
-        neighbors.forEach(neighbor -> {
-            if(!neighbor.getY().hasBeenHit() && !neighbor.getY().hasFlag()){
-                neighbor.getY().hit();
-                if(getNumberOfNearbyMines(neighbor.getX()) == 0){
-                    hitNeighbors(neighbor.getX());
-                }
-            }
-        });
     }
 
     private void checkCellExistence(Pair<Integer, Integer> position){

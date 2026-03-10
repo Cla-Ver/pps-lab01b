@@ -1,5 +1,7 @@
 package it.unibo.pps.e3;
 
+import java.util.*;
+
 public class LogicsImpl implements Logics {
 
     private final Grid grid;
@@ -22,12 +24,15 @@ public class LogicsImpl implements Logics {
     @Override
     public boolean hit(Pair<Integer, Integer> position) {
         isGameOver = grid.hitCell(position);
+        if (!isGameOver && grid.getAmountOfNearbyMines(position) == 0) {
+            hitNeighbors(position);
+        }
         return isGameOver;
     }
 
     @Override
     public long getAmountOfNearbyMines(Pair<Integer, Integer> center) {
-        return grid.getNumberOfNearbyMines(center);
+        return grid.getAmountOfNearbyMines(center);
     }
 
     @Override
@@ -53,6 +58,18 @@ public class LogicsImpl implements Logics {
     @Override
     public boolean isFlagged(Pair<Integer, Integer> position) {
         return grid.isFlagged(position);
+    }
+
+    private void hitNeighbors(Pair<Integer, Integer> center) {
+        Collection<Pair<Integer, Integer>> neighbors = grid.getNeighborPositions(center);
+        neighbors.forEach(neighborPos -> {
+            if (!grid.hasBeenHit(neighborPos) && !grid.isFlagged(neighborPos)) {
+                grid.hitCell(neighborPos);
+                if (grid.getAmountOfNearbyMines(neighborPos) == 0) {
+                    hitNeighbors(neighborPos);
+                }
+            }
+        });
     }
 
 }
