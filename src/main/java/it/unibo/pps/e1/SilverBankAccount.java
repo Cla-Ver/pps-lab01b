@@ -5,14 +5,14 @@ public class SilverBankAccount extends CoreBankAccount {
 
     @Override
     public void withdraw(int amount) {
-        if (this.getBalance() < amount){
+        if (this.getBalance() + getWithdrawalFee(amount) < amount){
             throw new IllegalStateException();
         }
-        super.withdraw(amount + 1);
+        super.withdraw(amount);
     }
 
     @Override
     public int getWithdrawalFee(int amountToWithdraw) {
-        return 0;
+        return 1;
     }
 }
