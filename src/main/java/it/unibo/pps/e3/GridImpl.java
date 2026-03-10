@@ -80,8 +80,8 @@ public class GridImpl implements Grid {
     }
 
     @Override
-    public long getNumberOfNearbyMines(Pair<Integer, Integer> position) {
-        List<Cell> neighbors = new ArrayList<>(getNeighbors(position).stream().map(Pair::getY).toList());
+    public long getNumberOfNearbyMines(Pair<Integer, Integer> center) {
+        List<Cell> neighbors = new ArrayList<>(getNeighbors(center).stream().map(Pair::getY).toList());
         return neighbors.stream().filter(Cell::hasMine).count();
     }
 
@@ -92,9 +92,9 @@ public class GridImpl implements Grid {
     }
 
     @Override
-    public void toggleFlag(Pair<Integer, Integer> flaggedCell) {
-        checkCellExistence(flaggedCell);
-        cells.get(flaggedCell).toggleFlag();
+    public void toggleFlag(Pair<Integer, Integer> cellPosition) {
+        checkCellExistence(cellPosition);
+        cells.get(cellPosition).toggleFlag();
     }
 
     @Override

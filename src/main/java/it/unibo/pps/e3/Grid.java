@@ -47,7 +47,7 @@ public interface Grid {
      *
      *
      */
-    long getNumberOfNearbyMines(Pair<Integer, Integer> integerIntegerPair);
+    long getNumberOfNearbyMines(Pair<Integer, Integer> center);
 
     /**
      *
@@ -67,7 +67,7 @@ public interface Grid {
      *
      * @throws IllegalArgumentException If the cell does not exist.
      * */
-    void toggleFlag(Pair<Integer, Integer> flaggedCell);
+    void toggleFlag(Pair<Integer, Integer> cellPosition);
 
     /**
      *

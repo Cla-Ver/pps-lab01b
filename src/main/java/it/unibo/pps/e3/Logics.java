@@ -24,12 +24,12 @@ public interface Logics {
      *
      * Hits the cell in the given position.
      *
-     * @param minePosition the position to hit.
+     * @param position the position to hit.
      * @return True if the cell is armed (there is a mine).
      * @throws IllegalArgumentException if the position is out of bounds.
      *
      * */
-    boolean hit(Pair<Integer, Integer> minePosition);
+    boolean hit(Pair<Integer, Integer> position);
 
     /**
      *

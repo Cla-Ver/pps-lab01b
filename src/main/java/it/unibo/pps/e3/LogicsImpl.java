@@ -20,8 +20,8 @@ public class LogicsImpl implements Logics {
     }
 
     @Override
-    public boolean hit(Pair<Integer, Integer> minePosition) {
-        isGameOver = grid.hitCell(minePosition);
+    public boolean hit(Pair<Integer, Integer> position) {
+        isGameOver = grid.hitCell(position);
         return isGameOver;
     }
 
