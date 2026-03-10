@@ -87,7 +87,6 @@ public class LogicsTest {
         Pair<Integer, Integer> minePosition = new Pair<>(GRID_SIZE - 1, GRID_SIZE - 1);
         logics = new LogicsImpl(new GridImpl(GRID_SIZE, N_MINES, List.of(minePosition)));
         logics.hit(cellPosition);
-        //grid.hitCell(cellPosition);
         assertTrue(logics.hasBeenHit(neighborEmptyCell));
     }
 
